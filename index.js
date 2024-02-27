@@ -28,7 +28,7 @@ const init = () => {
   const conf = JSON.parse(fs.readFileSync(filePath))
   if (conf.isAutoPush) {
     options.get('1').fn()
-    options.get('4').fn()
+    // options.get('4').fn()
   }
 }
 init()
