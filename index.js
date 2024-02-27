@@ -28,12 +28,10 @@ const init = () => {
   console.log(conf.isAutoPush)
   if (conf.isAutoPush) {
     options.get('1').fn()
-    console.log(options.get('1').label)
   }
 }
 init()
 
-return
 process.stdin.on('data', async data => {
   console.clear()
   printMenu()
