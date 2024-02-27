@@ -4,32 +4,50 @@ const { configFileName } = require('./constant');
 const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs');
-const readline = require('readline');
 
 const options = new Map();
 
+const printMenu = () => {
+  console.log('---------------------')
+  console.log('欢迎使用 [码记]')
+  console.log('---------------------')
+  for (const menuItem of options.values()) {
+    console.log(menuItem.label)
+  }
+  console.log('请输入指令序号, 按下回车键结束:')
+}
+
 const autoPush = {
-  label: '1. 开始自动同步',
+  label: `1. 开始自动同步 [${chalk.red('关闭')}]`,
   timer: null,
   fn: () => {
-    console.log('已开始自动同步')
     const filePath = path.join(__dirname, configFileName);
     if (fs.existsSync(filePath)) {
-      let data = fs.readFileSync(path.join(__dirname, configFileName), 'utf-8');
-      data = JSON.parse(data);
-      data.isAutoPush = true;
-      if (!data.pushInterval) {
-        data.pushInterval = 1000 * 60 * 60; // 默认值
-      } else if (data.pushInterval < 1000 * 60) {
-        data.pushInterval = 1000 * 60; // 最快 1 分钟一次
-      } else if (data.pushInterval > 1000 * 60 * 60 * 24) {
-        data.pushInterval = 1000 * 60 * 60 * 24; // 最慢 1 天一次
+      let conf = fs.readFileSync(path.join(__dirname, configFileName), 'utf-8');
+      conf = JSON.parse(conf);
+      if (autoPush.timer !== null) {
+        clearInterval(autoPush.timer);
+        autoPush.timer = null
+        autoPush.label = `1. 开始自动同步 [${chalk.red('关闭')}]`;
+        console.log(chalk.red('已关闭自动同步'));
+      } else {
+        autoPush.label = `1. 开始自动同步 [${chalk.blue('开启')}]`; 
+        conf.isAutoPush = true;
+        if (!conf.pushInterval) {
+          conf.pushInterval = 1000 * 60 * 60; // 默认值
+        } else if (conf.pushInterval < 1000 * 60) {
+          conf.pushInterval = 1000 * 1; // 最快 1 分钟一次
+        } else if (conf.pushInterval > 1000 * 60 * 60 * 24) {
+          conf.pushInterval = 1000 * 60 * 60 * 24; // 最慢 1 天一次
+        }
+        console.log(chalk.blue('已开始自动同步'));
+        console.log(`自动同步频率为: ${chalk.blue(formatChineseTime(conf.pushInterval))}`)
+        asyncGit();
+        clearInterval(autoPush.timer);
+        autoPush.timer = setInterval(asyncGit, conf.pushInterval);
       }
-      asyncGit();
-      clearInterval(autoPush.timer);
-      autoPush.timer = setInterval(asyncGit, data.pushInterval);
-      console.log(`自动同步频率为: ${chalk.blue(formatChineseTime(data.pushInterval))}`)
     }
+    printMenu();
   }
 }
 
@@ -37,12 +55,16 @@ options.set('1', autoPush)
 
 options.set('2', {
   label: '2. 立刻同步代码',
-  fn: asyncGit
+  fn: () => {
+    asyncGit()
+    printMenu();
+  }
 })
 
 options.set('3', {
   label: '3. 打开 vsCode',
   fn: () => {
+    printMenu();
     execSync('code .')
     console.log('已执行 ')
   }
@@ -51,18 +73,17 @@ options.set('3', {
 const toggleAutoPush = {
   label: `4. [${chalk.blue('开启')}] 默认同步`,
   fn: () => {
-    const filePath = path.join('./', configFileName)
-    const conf = JSON.parse(fs.readFileSync(filePath))
+    const filePath = path.join('./', configFileName);
+    const conf = JSON.parse(fs.readFileSync(filePath));
     if (conf.isAutoPush) {
-      console.log('关闭')
-      clearInterval(autoPush.timer);
-      autoPush.label = `1. 开始自动同步 [${chalk.red('关闭')}]`;
-      toggleAutoPush.label = `4. [${chalk.blue('开启')}] 默认同步`
+      conf.isAutoPush = false;
+      toggleAutoPush.label = `4. [${chalk.blue('开启')}] 默认同步`;
     } else {
-      console.log('开启')
-      autoPush.label = `1. 开始自动同步 [${chalk.blue('开启')}]`;
-      toggleAutoPush.label = `4. [${chalk.red('关闭')}] 默认同步`
+      conf.isAutoPush = true;
+      toggleAutoPush.label = `4. [${chalk.red('关闭')}] 默认同步`;
     }
+    fs.writeFileSync(path.join('./', configFileName), JSON.stringify(conf));
+    printMenu();
   }
 }
 
@@ -71,6 +92,7 @@ options.set('4', toggleAutoPush)
 const help = {
   label: '5. 帮助',
   fn: () => {
+    printMenu();
     console.log('帮助:')
     console.log('开发者: 程序员小石(抖音)')
     console.log('微信号: CoderXiaoShi')
@@ -88,4 +110,7 @@ options.set('6', {
   }
 })
 
-module.exports = options;
+module.exports = {
+  options, 
+  printMenu
+};
