@@ -17,9 +17,9 @@ const printMenu = () => {
   console.log('请输入指令序号, 按下回车键结束:')
 }
 
-printMenu()
 
 const init = () => {
+  console.log('码记: 正在启动...')
   // 配置检查
   // initLocalConf()
   // 自动提交
@@ -32,6 +32,7 @@ const init = () => {
 }
 init()
 
+printMenu()
 process.stdin.on('data', async data => {
   console.clear()
   printMenu()
