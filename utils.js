@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { exec, execSync } = require('child_process')
 const { configFileName, defaultConfig } = require('./constant');
+const moment = require('moment')
 
 /**
  * 提交函数
@@ -9,30 +10,16 @@ const { configFileName, defaultConfig } = require('./constant');
  * 2. 提交了: 多少文件 多少行 , 打印出 git log
  */
 const asyncGit = () => {
+  // 输出
+  console.log("同步时间为：", moment().format('YYYY-MMM-DD H:mm:ss'));
   try {
-    // 获取当前时间
-    var now = new Date();
-
-    // 分别获取年、月、日、小时、分钟和秒
-    var year = now.getFullYear(); // 获取完整的四位数年份
-    var day = now.getDate(); // 获取日
-    var hours = now.getHours(); // 获取小时（0-23）
-    var minutes = now.getMinutes(); // 获取分钟
-    var seconds = now.getSeconds(); // 获取秒
-
-    // 输出
-    console.log("当前时间为：", year, "年", day, "日 ", hours, "时", minutes, "分", seconds, "秒");
-    try {
-      execSync('git add .');
-      execSync('git commit -m "update"');
-      execSync('git pull');
-      execSync('git push');
-      console.log('同步成功')
-    } catch (error) {
-      console.log('同步失败')
-    }
+    execSync('git add .');
+    execSync('git commit -m "update"');
+    execSync('git pull');
+    execSync('git push');
+    console.log('同步成功')
   } catch (error) {
-    console.error(error);
+    console.log('同步失败')
   }
 }
 
@@ -58,5 +45,6 @@ const initLocalConf = (configPath) => {
 }
 
 module.exports = {
-  asyncGit
+  asyncGit,
+  initLocalConf,
 }

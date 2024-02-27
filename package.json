@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/CoderXiaoShi/maji/issues"
   },
-  "homepage": "https://github.com/CoderXiaoShi/maji#readme"
+  "homepage": "https://github.com/CoderXiaoShi/maji#readme",
+  "dependencies": {
+    "moment": "^2.30.1"
+  }
 }
