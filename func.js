@@ -30,8 +30,10 @@ const autoPush = {
         autoPush.timer = null
         autoPush.label = `1. 开始自动同步 [${chalk.red('关闭')}]`;
         console.log(chalk.red('已关闭自动同步'));
+        printMenu()
       } else {
         autoPush.label = `1. 开始自动同步 [${chalk.blue('开启')}]`; 
+        printMenu()
         conf.isAutoPush = true;
         if (!conf.pushInterval) {
           conf.pushInterval = 1000 * 60 * 60; // 默认值
@@ -47,7 +49,6 @@ const autoPush = {
         autoPush.timer = setInterval(asyncGit, conf.pushInterval);
       }
     }
-    printMenu()
   }
 }
 
