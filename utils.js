@@ -21,13 +21,13 @@ function parseGitPushOutput(output) {
     result.total = parseInt(totalMatch[1]);
   }
 
-  if (enumeratingObjectsMatch) {
-    result.EnumeratingObjects = parseInt(enumeratingObjectsMatch[1]);
-  }
+  // if (enumeratingObjectsMatch) {
+  //   result.EnumeratingObjects = parseInt(enumeratingObjectsMatch[1]);
+  // }
 
-  if (writingObjectsMatch) {
-    result.WritingObjects = writingObjectsMatch[3];
-  }
+  // if (writingObjectsMatch) {
+  //   result.WritingObjects = writingObjectsMatch[3];
+  // }
 
   return result;
 }
