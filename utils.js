@@ -13,7 +13,7 @@ const chalk = require('chalk');
 const asyncGit = () => {
   // 输出
   // TODO 检查本目录是否为 git 仓库: 依赖 simple-git
-  console.log("同步时间为：", moment().format('YYYY-MMM-DD H:mm:ss'));
+  console.log("同步时间为：", moment().format('YYYY-MM-DD H:mm:ss'));
   try {
     execSync('git add .');
     execSync('git commit -m "update"');
