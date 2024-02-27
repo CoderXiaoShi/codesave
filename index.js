@@ -25,7 +25,6 @@ const init = () => {
   // 自动提交
   const filePath = path.join('./', configFileName)
   const conf = JSON.parse(fs.readFileSync(filePath))
-  console.log(conf.isAutoPush)
   if (conf.isAutoPush) {
     options.get('1').fn()
   }
