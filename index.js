@@ -32,6 +32,7 @@ const init = () => {
 init()
 
 printMenu()
+
 process.stdin.on('data', async data => {
   console.clear()
   printMenu()
