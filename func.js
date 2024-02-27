@@ -21,9 +21,9 @@ const autoPush = {
   label: `1. 开始自动同步 [${chalk.red('关闭')}]`,
   timer: null,
   fn: () => {
-    const filePath = path.join(__dirname, configFileName);
+    const filePath = path.join('./', configFileName);
     if (fs.existsSync(filePath)) {
-      let conf = fs.readFileSync(path.join(__dirname, configFileName), 'utf-8');
+      let conf = fs.readFileSync(path.join('./', configFileName), 'utf-8');
       conf = JSON.parse(conf);
       if (autoPush.timer !== null) {
         clearInterval(autoPush.timer);
