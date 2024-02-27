@@ -54,9 +54,9 @@ const asyncGit = () => {
     console.log("当前时间为：", year, "年", day, "日 ", hours, "时", minutes, "分", seconds, "秒");
     let txt = ''
     try {
-      txt = execSync('git add .');
-      txt = execSync('git commit -m "update"');
-      txt = execSync('git pull');
+      execSync('git add .');
+      execSync('git commit -m "update"');
+      execSync('git pull');
       txt = execSync('git push');
       const gitOutput = parseGitPushOutput(txt);
       console.log(gitOutput);
