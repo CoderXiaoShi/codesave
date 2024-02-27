@@ -3,6 +3,36 @@ const fs = require('fs');
 const { exec, execSync } = require('child_process')
 const { configFileName, defaultConfig } = require('./constant');
 
+/*
+  解析 git 提交后的内容
+*/
+function parseGitPushOutput(output) {
+  const lines = output.split('\n');
+  const totalLine = lines.find(line => line.startsWith('Total '));
+  const totalMatch = totalLine.match(/Total (\d+) /);
+  const enumeratingObjectsLine = lines.find(line => line.startsWith('Enumerating objects:'));
+  const enumeratingObjectsMatch = enumeratingObjectsLine.match(/Enumerating objects: (\d+),/);
+  const writingObjectsLine = lines.find(line => line.startsWith('Writing objects:'));
+  const writingObjectsMatch = writingObjectsLine.match(/Writing objects: 100% \((\d+)\/(\d+)\), (\d+\.\d+ [KMGT]iB) /);
+
+  const result = {};
+
+  if (totalMatch) {
+    result.total = parseInt(totalMatch[1]);
+  }
+
+  if (enumeratingObjectsMatch) {
+    result.EnumeratingObjects = parseInt(enumeratingObjectsMatch[1]);
+  }
+
+  if (writingObjectsMatch) {
+    result.WritingObjects = writingObjectsMatch[3];
+  }
+
+  return result;
+}
+
+
 /**
  * 提交函数
  * 1. 什么都没有提交
@@ -22,12 +52,14 @@ const asyncGit = () => {
 
     // 输出
     console.log("当前时间为：", year, "年", day, "日 ", hours, "时", minutes, "分", seconds, "秒");
+    let txt = ''
     try {
-      let txt = execSync('git add .');
+      txt = execSync('git add .');
       txt = execSync('git commit -m "update"');
-      console.log(txt);
-      // execSync('git pull')
-      // execSync('git push')
+      txt = execSync('git pull');
+      txt = execSync('git push');
+      const gitOutput = parseGitPushOutput(txt);
+      console.log(gitOutput);
     } catch (error) {
       
     }
