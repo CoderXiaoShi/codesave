@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { exec, execSync } = require('child_process');
 const { options, printMenu } = require('./func');
 const { initLocalConf } = require('./utils');
