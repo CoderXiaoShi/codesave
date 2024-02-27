@@ -55,6 +55,7 @@ const toggleAutoPush = {
     const conf = JSON.parse(fs.readFileSync(filePath))
     if (conf.isAutoPush) {
       console.log('关闭')
+      clearInterval(autoPush.timer);
       autoPush.label = `1. 开始自动同步 [${chalk.red('关闭')}]`;
       toggleAutoPush.label = `4. [${chalk.blue('开启')}] 默认同步`
     } else {
