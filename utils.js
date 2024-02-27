@@ -61,7 +61,6 @@ const asyncGit = () => {
       const gitOutput = parseGitPushOutput(txt);
       console.log(gitOutput);
     } catch (error) {
-      
     }
   } catch (error) {
     console.error(error);
