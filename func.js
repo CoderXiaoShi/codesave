@@ -52,13 +52,13 @@ const autoPush = {
   }
 }
 
-options.set('1', autoPush);
+options.set('1', autoPush)
 
 options.set('2', {
   label: '2. 立刻同步代码',
   fn: () => {
-    asyncGit()
     printMenu();
+    asyncGit();
   }
 })
 
