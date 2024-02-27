@@ -11,9 +11,9 @@ const chalk = require('chalk');
 process.stdin.setEncoding('utf-8')
 
 const init = () => {
-  console.log('码记: 正在启动...')
+  console.log('码记: 正在启动...');
   // 配置检查
-  initLocalConf()
+  initLocalConf();
   // 自动提交
   const filePath = path.join('./', configFileName)
   const conf = JSON.parse(fs.readFileSync(filePath))
