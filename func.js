@@ -97,7 +97,7 @@ const help = {
     console.log('开发者: 程序员小石(抖音)')
     console.log('微信号: CoderXiaoShi')
     console.log('个人博客: https://xinglong.tech/')
-    console.log('github: https://github.com/CoderXiaoShi/codelog')
+    console.log('github: https://github.com/CoderXiaoShi/codesave')
   }
 }
 

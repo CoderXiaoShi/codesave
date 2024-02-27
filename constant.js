@@ -1,4 +1,4 @@
-const configFileName = '.codelog'
+const configFileName = '.codesave'
 
 const defaultConfig = {
   isAutoPush: true,             // 是否开启自动提交

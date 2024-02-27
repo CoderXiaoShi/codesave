@@ -38,7 +38,7 @@ const initLocalConf = (configPath) => {
     fs.writeFileSync(filePath, JSON.stringify(defaultConfig), 'utf8')
     // 将配置添加到 .gitignore 中
     const gitignoreContent = fs.readFileSync(path.join(configPath, '.gitignore'), 'utf8')
-    if (!gitignoreContent.includes('.codelog')) {
+    if (!gitignoreContent.includes(configFileName)) {
       fs.appendFileSync(path.join(configPath, '.gitignore'), `\n${configFileName}`, 'utf8')
     }
   }

@@ -1,5 +1,5 @@
 {
-  "name": "codelog",
+  "name": "codesave",
   "version": "1.0.0",
   "description": "码记",
   "main": "index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CoderXiaoShi/codelog.git"
+    "url": "git+https://github.com/CoderXiaoShi/codesave.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CoderXiaoShi/codelog/issues"
+    "url": "https://github.com/CoderXiaoShi/codesave/issues"
   },
-  "homepage": "https://github.com/CoderXiaoShi/codelog#readme",
+  "homepage": "https://github.com/CoderXiaoShi/codesave#readme",
   "dependencies": {
     "chalk": "4.0.0",
     "moment": "2.30.1"
