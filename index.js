@@ -1,6 +1,9 @@
 const { exec, execSync } = require('child_process')
 const options = require('./func')
 const { initLocalConf } = require('./utils')
+const { configFileName } = require('./constant')
+const fs = require('fs')
+const path = require('path')
 
 process.stdin.setEncoding('utf-8')
 
@@ -18,11 +21,19 @@ printMenu()
 
 const init = () => {
   // 配置检查
-  initLocalConf()
+  // initLocalConf()
   // 自动提交
+  const filePath = path.join('./', configFileName)
+  const conf = JSON.parse(fs.readFileSync(filePath))
+  console.log(conf.isAutoPush)
+  if (conf.isAutoPush) {
+    options.get('1').fn()
+    console.log(options.get('1').label)
+  }
 }
-// init()
+init()
 
+return
 process.stdin.on('data', async data => {
   console.clear()
   printMenu()
