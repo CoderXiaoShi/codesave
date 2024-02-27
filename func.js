@@ -56,17 +56,14 @@ options.set('4', {
 
 const help = {
   label: '5. 帮助',
-  fn: help
-}
-
-options.set('5', {
-  label: '5. 帮助',
   fn: () => {
     console.log('帮助:')
     console.log('开发者: 程序员小石(抖音)')
     console.log('微信号: CoderXiaoShi')
   }
-})
+}
+
+options.set('5', help)
 
 options.set('6', {
   label: '6. 退出',
