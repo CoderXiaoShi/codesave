@@ -28,7 +28,7 @@ const init = () => {
 init()
 
 process.stdin.on('data', async data => {
-  console.clear()
+  console.clear();
   let id = data.trim()
   const menuItem = options.get(id)
   if (menuItem) {
