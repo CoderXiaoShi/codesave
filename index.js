@@ -27,9 +27,8 @@ const init = () => {
   const filePath = path.join('./', configFileName)
   const conf = JSON.parse(fs.readFileSync(filePath))
   if (conf.isAutoPush) {
-    options.get('1').fn()
     options.get('4').fn()
-    options.get('4').label = `4. [${chalk.red('关闭')}] 默认同步`
+    options.get('1').fn()
   }
 }
 init()
