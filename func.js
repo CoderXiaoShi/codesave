@@ -1,8 +1,10 @@
 const { asyncGit, formatChineseTime } = require('./utils');
+const { execSync } = require('child_process')
 const { configFileName } = require('./constant');
 const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs');
+const readline = require('readline');
 
 const options = new Map();
 
@@ -41,7 +43,7 @@ options.set('2', {
 options.set('3', {
   label: '3. 打开 vsCode',
   fn: () => {
-    exec('code .')
+    execSync('code .')
     console.log('已执行 ')
   }
 })
@@ -49,7 +51,19 @@ options.set('3', {
 options.set('4', {
   label: '4. 是否默认开启自动同步',
   fn: () => {
+    console.log()
     // 写入 是否自动存储标记
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.output
+    })
+    // 获取开启状态
+    let status = chalk.red('开启');
+    console.log(`是否要开启 自动同步 (当前状态: ${status})`)
+    rl.question(`是否要开启 自动同步 (当前状态: ${status})`, value => {
+      console.log(value)
+      // rl.close()
+    })
   }
 })
 
