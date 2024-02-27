@@ -26,7 +26,6 @@ const init = () => {
   const filePath = path.join('./', configFileName)
   const conf = JSON.parse(fs.readFileSync(filePath))
   if (conf.isAutoPush) {
-    console.log('默认开启自动同步')
     options.get('1').fn()
   }
 }
