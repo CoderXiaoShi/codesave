@@ -32,7 +32,6 @@ const autoPush = {
 
 let timer = null;
 options.set('1', autoPush)
-autoPush.fn()
 
 options.set('2', {
   label: '2. 立刻同步代码',
