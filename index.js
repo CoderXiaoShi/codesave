@@ -38,7 +38,6 @@ printMenu()
 
 process.stdin.on('data', async data => {
   console.clear()
-  printMenu()
   let id = data.trim()
   const menuItem = options.get(id)
   if (menuItem) {
@@ -52,6 +51,7 @@ process.stdin.on('data', async data => {
   } else {
     console.log('未知命令, 请重新输入')
   }
+  printMenu()
 })
 
 process.stdin.resume();
