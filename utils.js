@@ -5,8 +5,6 @@ const { configFileName, defaultConfig } = require('./constant');
 const moment = require('moment');
 const chalk = require('chalk');
 
-console.log(chalk)
-
 /**
  * 提交函数
  * 1. 什么都没有提交

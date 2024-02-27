@@ -1,6 +1,7 @@
 const { asyncGit, formatChineseTime } = require('./utils');
 const { configFileName } = require('./constant');
 const path = require('path');
+const chalk = require('chalk');
 const fs = require('fs');
 
 const options = new Map();
@@ -53,9 +54,18 @@ options.set('4', {
   }
 })
 
-options.set('5', {
+const help = {
   label: '5. 帮助',
   fn: help
+}
+
+options.set('5', {
+  label: '5. 帮助',
+  fn: () => {
+    console.log('帮助:')
+    console.log('开发者: 程序员小石(抖音)')
+    console.log('微信号: CoderXiaoShi')
+  }
 })
 
 options.set('6', {
