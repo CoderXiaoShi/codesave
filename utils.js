@@ -58,8 +58,9 @@ const asyncGit = () => {
       execSync('git commit -m "update"');
       execSync('git pull');
       txt = execSync('git push');
-      const gitOutput = parseGitPushOutput(txt);
-      console.log(gitOutput);
+      console.log(txt);
+      // const gitOutput = parseGitPushOutput(txt);
+      // console.log(gitOutput);
     } catch (error) {
     }
   } catch (error) {
