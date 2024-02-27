@@ -52,18 +52,11 @@ const asyncGit = () => {
 
     // 输出
     console.log("当前时间为：", year, "年", day, "日 ", hours, "时", minutes, "分", seconds, "秒");
-    let txt = ''
     try {
       execSync('git add .');
       execSync('git commit -m "update"');
       execSync('git pull');
-      exec('git push', (error, stdout, stderr) => {
-        console.log(error, stdout, stderr);
-      })
-      // txt = execSync('git push');
-      // console.log(txt);
-      // const gitOutput = parseGitPushOutput(txt);
-      // console.log(gitOutput);
+      execSync('git push');
     } catch (error) {
     }
   } catch (error) {
