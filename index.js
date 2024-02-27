@@ -28,8 +28,8 @@ const init = () => {
   const conf = JSON.parse(fs.readFileSync(filePath))
   if (conf.isAutoPush) {
     options.get('1').fn();
-    options.get('1').label = `1. 开始自动同步 [${chalk.red('关闭')}]`;
-    options.get('4').label = `4. [${chalk.blue('开启')}] 默认同步`;
+    options.get('1').label = `1. 开始自动同步 [${chalk.blue('开启')}]`;
+    options.get('4').label = `4. [${chalk.red('关闭')}] 默认同步`;
   }
 }
 init()
@@ -38,6 +38,7 @@ printMenu()
 
 process.stdin.on('data', async data => {
   console.clear()
+  printMenu()
   let id = data.trim()
   const menuItem = options.get(id)
   if (menuItem) {
@@ -51,7 +52,6 @@ process.stdin.on('data', async data => {
   } else {
     console.log('未知命令, 请重新输入')
   }
-  printMenu()
 })
 
 process.stdin.resume();
