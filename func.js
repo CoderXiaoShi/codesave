@@ -1,16 +1,37 @@
-const { asyncGit } = require('./utils')
+const { asyncGit, formatChineseTime } = require('./utils');
+const { configFileName } = require('./constant');
+const path = require('path');
+const fs = require('fs');
 
-const options = new Map()
+const options = new Map();
 
-options.set('1', {
+const autoPush = {
   label: '1. 开始自动同步',
   fn: () => {
     console.log('已开始自动同步')
-    asyncGit();
-    clearInterval(timer);
-    timer = setInterval(asyncGit, 1000 * 60 * 60)
+    const filePath = path.join(__dirname, configFileName);
+    if (fs.existsSync(filePath)) {
+      let data = fs.readFileSync(path.join(__dirname, configFileName), 'utf-8')
+      data = JSON.parse(data)
+      data.isAutoPush = true;
+      if (!data.pushInterval) {
+        data.pushInterval = 1000 * 60 * 60; // 默认值
+      } else if (data.pushInterval < 1000 * 60) {
+        data.pushInterval = 1000 * 60; // 最快 1 分钟一次
+      } else if (data.pushInterval > 1000 * 60 * 60 * 24) {
+        data.pushInterval = 1000 * 60 * 60 * 24; // 最慢 1 天一次
+      }
+      asyncGit();
+      clearInterval(timer);
+      timer = setInterval(asyncGit, data.pushInterval);
+      console.log(`已开始自动同步, 同步频率为: ${formatChineseTime(data.pushInterval)}`)
+    }
   }
-})
+}
+
+let timer = null;
+options.set('1', autoPush)
+autoPush.fn();
 
 options.set('2', {
   label: '2. 立刻同步代码',

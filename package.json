@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/CoderXiaoShi/maji#readme",
   "dependencies": {
-    "moment": "^2.30.1"
+    "chalk": "4.0.0",
+    "moment": "2.30.1"
   }
 }

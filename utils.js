@@ -1,8 +1,11 @@
 const path = require('path');
 const fs = require('fs');
-const { exec, execSync } = require('child_process')
+const { execSync } = require('child_process');
 const { configFileName, defaultConfig } = require('./constant');
-const moment = require('moment')
+const moment = require('moment');
+const chalk = require('chalk');
+
+console.log(chalk)
 
 /**
  * 提交函数
@@ -11,6 +14,7 @@ const moment = require('moment')
  */
 const asyncGit = () => {
   // 输出
+  // TODO 检查本目录是否为 git 仓库: 依赖 simple-git
   console.log("同步时间为：", moment().format('YYYY-MMM-DD H:mm:ss'));
   try {
     execSync('git add .');
@@ -22,8 +26,6 @@ const asyncGit = () => {
     console.log('同步失败')
   }
 }
-
-asyncGit()
 
 /**
  * 
@@ -44,7 +46,22 @@ const initLocalConf = (configPath) => {
   }
 }
 
+const formatChineseTime = (milliseconds) => {
+  const seconds = Math.floor((milliseconds / 1000) % 60);
+  const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
+  const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
+
+  if (hours > 0) {
+    return `${hours}小时${minutes}分钟${seconds}秒`;
+  } else if (minutes > 0) {
+    return `${minutes}分钟${seconds}秒`;
+  } else {
+    return `${seconds}秒`;
+  }
+}
+
 module.exports = {
   asyncGit,
   initLocalConf,
+  formatChineseTime,
 }
