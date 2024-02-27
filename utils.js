@@ -3,36 +3,6 @@ const fs = require('fs');
 const { exec, execSync } = require('child_process')
 const { configFileName, defaultConfig } = require('./constant');
 
-/*
-  解析 git 提交后的内容
-*/
-function parseGitPushOutput(output) {
-  const lines = output.split('\n');
-  const totalLine = lines.find(line => line.startsWith('Total '));
-  const totalMatch = totalLine.match(/Total (\d+) /);
-  const enumeratingObjectsLine = lines.find(line => line.startsWith('Enumerating objects:'));
-  const enumeratingObjectsMatch = enumeratingObjectsLine.match(/Enumerating objects: (\d+),/);
-  const writingObjectsLine = lines.find(line => line.startsWith('Writing objects:'));
-  const writingObjectsMatch = writingObjectsLine.match(/Writing objects: 100% \((\d+)\/(\d+)\), (\d+\.\d+ [KMGT]iB) /);
-
-  const result = {};
-
-  if (totalMatch) {
-    result.total = parseInt(totalMatch[1]);
-  }
-
-  // if (enumeratingObjectsMatch) {
-  //   result.EnumeratingObjects = parseInt(enumeratingObjectsMatch[1]);
-  // }
-
-  // if (writingObjectsMatch) {
-  //   result.WritingObjects = writingObjectsMatch[3];
-  // }
-
-  return result;
-}
-
-
 /**
  * 提交函数
  * 1. 什么都没有提交
@@ -57,7 +27,9 @@ const asyncGit = () => {
       execSync('git commit -m "update"');
       execSync('git pull');
       execSync('git push');
+      console.log('同步成功')
     } catch (error) {
+      console.log('同步失败')
     }
   } catch (error) {
     console.error(error);
