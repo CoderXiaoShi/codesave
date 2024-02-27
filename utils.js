@@ -31,7 +31,7 @@ const asyncGit = () => {
  * 检查某个目录中是否有配置文件
  * 如果没有就创建并且新增倒 .gitignore 中
  */
-const initLocalConf = (configPath) => {
+const initLocalConf = (configPath = './') => {
   let filePath = path.join(configPath, configFileName)
   if (!fs.existsSync(filePath)) {
     // 配置不存在, 初始化
