@@ -12,8 +12,8 @@ const autoPush = {
     console.log('已开始自动同步')
     const filePath = path.join(__dirname, configFileName);
     if (fs.existsSync(filePath)) {
-      let data = fs.readFileSync(path.join(__dirname, configFileName), 'utf-8')
-      data = JSON.parse(data)
+      let data = fs.readFileSync(path.join(__dirname, configFileName), 'utf-8');
+      data = JSON.parse(data);
       data.isAutoPush = true;
       if (!data.pushInterval) {
         data.pushInterval = 1000 * 60 * 60; // 默认值
@@ -25,14 +25,14 @@ const autoPush = {
       asyncGit();
       clearInterval(timer);
       timer = setInterval(asyncGit, data.pushInterval);
-      console.log(`已开始自动同步, 同步频率为: ${formatChineseTime(data.pushInterval)}`)
+      console.log(`已开始自动同步, 同步频率为: ${chalk.blue(formatChineseTime(data.pushInterval))}`)
     }
   }
 }
 
 let timer = null;
 options.set('1', autoPush)
-autoPush.fn();
+autoPush.fn()
 
 options.set('2', {
   label: '2. 立刻同步代码',
@@ -60,6 +60,8 @@ const help = {
     console.log('帮助:')
     console.log('开发者: 程序员小石(抖音)')
     console.log('微信号: CoderXiaoShi')
+    console.log('个人博客: https://xinglong.tech/')
+    console.log('github: https://github.com/CoderXiaoShi/codelog')
   }
 }
 
@@ -73,4 +75,3 @@ options.set('6', {
 })
 
 module.exports = options;
-

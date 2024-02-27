@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CoderXiaoShi/maji.git"
+    "url": "git+https://github.com/CoderXiaoShi/codelog.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CoderXiaoShi/maji/issues"
+    "url": "https://github.com/CoderXiaoShi/codelog/issues"
   },
-  "homepage": "https://github.com/CoderXiaoShi/maji#readme",
+  "homepage": "https://github.com/CoderXiaoShi/codelog#readme",
   "dependencies": {
     "chalk": "4.0.0",
     "moment": "2.30.1"
