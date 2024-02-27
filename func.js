@@ -51,21 +51,28 @@ options.set('3', {
 })
 
 options.set('4', {
-  label: '4. 是否默认开启自动同步',
+  label: '4. 开启默认同步',
   fn: () => {
-    console.log()
-    // 写入 是否自动存储标记
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.output
-    })
-    // 获取开启状态
-    let status = chalk.red('开启');
-    console.log(`是否要开启 自动同步 (当前状态: ${status})`)
-    rl.question(`是否要开启 自动同步 (当前状态: ${status})`, value => {
-      console.log(value)
-      // rl.close()
-    })
+    const filePath = path.join('./', configFileName)
+    const conf = JSON.parse(fs.readFileSync(filePath))
+    if (conf.isAutoPush) {
+      console.log('关闭')
+    } else {
+      console.log('开启')
+    }
+    // console.log()
+    // // 写入 是否自动存储标记
+    // const rl = readline.createInterface({
+    //   input: process.stdin,
+    //   output: process.output
+    // })
+    // // 获取开启状态
+    // let status = chalk.red('开启');
+    // console.log(`是否要开启 自动同步 (当前状态: ${status})`)
+    // rl.question(`是否要开启 自动同步 (当前状态: ${status})`, value => {
+    //   console.log(value)
+    //   // rl.close()
+    // })
   }
 })
 

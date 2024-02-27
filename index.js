@@ -4,6 +4,7 @@ const { initLocalConf } = require('./utils')
 const { configFileName } = require('./constant')
 const fs = require('fs')
 const path = require('path')
+const chalk = require('chalk')
 
 process.stdin.setEncoding('utf-8')
 
@@ -27,6 +28,9 @@ const init = () => {
   const conf = JSON.parse(fs.readFileSync(filePath))
   if (conf.isAutoPush) {
     options.get('1').fn()
+    options.get('4').fn()
+    
+    options.get('4').label = `4. [${chalk.red('关闭')}] 默认同步`
   }
 }
 init()
