@@ -1,5 +1,6 @@
 const { exec, execSync } = require('child_process')
 const options = require('./func')
+const { initLocalConf } = require('./utils')
 
 process.stdin.setEncoding('utf-8')
 
@@ -14,6 +15,13 @@ const printMenu = () => {
 }
 
 printMenu()
+
+const init = () => {
+  // 配置检查
+  initLocalConf()
+  // 自动提交
+}
+// init()
 
 process.stdin.on('data', async data => {
   console.clear()

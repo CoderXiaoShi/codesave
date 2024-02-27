@@ -26,6 +26,8 @@ const autoPush = {
       }
       asyncGit();
       clearInterval(timer);
+      let status = chalk.blue('开启')
+      autoPush.label = `1. 开始自动同步 [${status}]`;
       timer = setInterval(asyncGit, data.pushInterval);
       console.log(`已开始自动同步, 同步频率为: ${chalk.blue(formatChineseTime(data.pushInterval))}`)
     }
