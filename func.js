@@ -28,7 +28,7 @@ const autoPush = {
       asyncGit();
       clearInterval(autoPush.timer);
       autoPush.timer = setInterval(asyncGit, data.pushInterval);
-      console.log(`已开始自动同步, 同步频率为: ${chalk.blue(formatChineseTime(data.pushInterval))}`)
+      console.log(`自动同步频率为: ${chalk.blue(formatChineseTime(data.pushInterval))}`)
     }
   }
 }
