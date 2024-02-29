@@ -17,6 +17,12 @@ const printMenu = () => {
   console.log('请输入指令序号, 按下回车键结束:')
 }
 
+/*
+  自动提交需求
+    1. 定时提交
+    2. 再次调用, 停止自动提交
+*/
+
 const autoPush = {
   label: `1. 开始自动同步 [${chalk.red('关闭')}]`,
   timer: null,
