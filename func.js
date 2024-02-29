@@ -4,6 +4,7 @@ const { configFileName } = require('./constant');
 const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs');
+const pkg = require('./package.json')
 
 const options = new Map();
 
@@ -102,6 +103,7 @@ const help = {
     printMenu();
     console.log('帮助:')
     console.log('开发者: 程序员小石(抖音)')
+    console.log(`当前版本: ${pkg.version}`)
     console.log('微信号: CoderXiaoShi')
     console.log('个人博客: https://xinglong.tech/')
     console.log('github: https://github.com/CoderXiaoShi/codesave')
