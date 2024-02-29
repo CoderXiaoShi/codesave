@@ -36,10 +36,12 @@ const initLocalConf = (configPath = './') => {
   if (!fs.existsSync(filePath)) {
     // 配置不存在, 初始化
     fs.writeFileSync(filePath, JSON.stringify(defaultConfig), 'utf8')
-    // 将配置添加到 .gitignore 中
-    const gitignoreContent = fs.readFileSync(path.join(configPath, '.gitignore'), 'utf8')
-    if (!gitignoreContent.includes(configFileName)) {
-      fs.appendFileSync(path.join(configPath, '.gitignore'), `\n${configFileName}`, 'utf8')
+    if (fs.existsSync(path.join(configPath, '.gitignore'))) {
+      // 将配置添加到 .gitignore 中
+      const gitignoreContent = fs.readFileSync(path.join(configPath, '.gitignore'), 'utf8')
+      if (!gitignoreContent.includes(configFileName)) {
+        fs.appendFileSync(path.join(configPath, '.gitignore'), `\n${configFileName}`, 'utf8')
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "codesave",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "码记",
   "main": "index.js",
   "bin": "index.js",
@@ -20,6 +20,8 @@
   "homepage": "https://github.com/CoderXiaoShi/codesave#readme",
   "dependencies": {
     "chalk": "4.0.0",
-    "moment": "2.30.1"
+    "inquirer": "8.0.0",
+    "moment": "2.30.1",
+    "simple-git": "3.22.0"
   }
 }
