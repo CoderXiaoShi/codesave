@@ -105,6 +105,7 @@ const help = {
     console.log('开发者: 程序员小石(抖音)')
     console.log(`当前版本: ${pkg.version}`)
     console.log('微信号: CoderXiaoShi')
+    console.log('邮箱: 1003865572@qq.com')
     console.log('个人博客: https://xinglong.tech/')
     console.log('github: https://github.com/CoderXiaoShi/codesave')
   }
