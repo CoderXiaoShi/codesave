@@ -97,8 +97,16 @@ const toggleAutoPush = {
 
 options.set('4', toggleAutoPush)
 
+options.set('5', {
+  label: '5. 当前目录',
+  fn: () => {
+    printMenu();
+    console.log('当前目录为：', process.cwd());
+  }
+})
+
 const help = {
-  label: '5. 帮助',
+  label: '6. 帮助',
   fn: () => {
     printMenu();
     console.log('帮助:')
@@ -111,10 +119,10 @@ const help = {
   }
 }
 
-options.set('5', help)
+options.set('6', help)
 
-options.set('6', {
-  label: '6. 退出',
+options.set('7', {
+  label: '7. 退出',
   fn: () => {
     process.exit(0)
   }
