@@ -38,7 +38,6 @@ const getHistoryGitPath = () => {
 }
 
 const entry = (curPath = './') => {
-  console.log(curPath)
   process.chdir(curPath)
   saveGitPath(curPath)
   // 配置检查
@@ -82,7 +81,6 @@ const entry = (curPath = './') => {
   let curPath = process.cwd()
   // 判断当前仓库是否为 git 仓库
 
-  console.log(curPath)
   let isGitRepo = await simpleGit(curPath).checkIsRepo('root');
   if (!isGitRepo) {
     let res = getHistoryGitPath()
