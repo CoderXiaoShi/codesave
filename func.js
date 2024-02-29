@@ -101,7 +101,7 @@ const help = {
   label: '5. 帮助',
   fn: () => {
     printMenu();
-    console.log('帮助:')
+    console.log('\n帮助:')
     console.log('开发者: 程序员小石(抖音)')
     console.log(`当前版本: ${pkg.version}`)
     console.log('微信号: CoderXiaoShi')
