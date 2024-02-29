@@ -11,11 +11,11 @@ const options = new Map();
 const printMenu = () => {
   console.log('---------------------')
   console.log('欢迎使用 [码记]')
-  console.log('---------------------')
+  console.log('---------------------\n')
   for (const menuItem of options.values()) {
     console.log(menuItem.label)
   }
-  console.log('请输入指令序号, 按下回车键结束:')
+  console.log('请输入指令序号, 按下回车键结束:\n')
 }
 
 /*

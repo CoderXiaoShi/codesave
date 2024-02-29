@@ -17,6 +17,7 @@ const init = () => {
   // 自动提交
   const filePath = path.join('./', configFileName)
   const conf = JSON.parse(fs.readFileSync(filePath))
+  console.clear()
   if (conf.isAutoPush) {
     options.get('1').label = `1. 开始自动同步 [${chalk.blue('开启')}]`;
     options.get('4').label = `4. [${chalk.red('关闭')}] 默认同步`;
