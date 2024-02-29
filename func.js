@@ -36,8 +36,8 @@ const autoPush = {
         clearInterval(autoPush.timer);
         autoPush.timer = null
         autoPush.label = `1. 开始自动同步 [${chalk.red('关闭')}]`;
-        console.log(chalk.red('已关闭自动同步'));
         printMenu()
+        console.log(chalk.red('已关闭自动同步'));
       } else {
         autoPush.label = `1. 开始自动同步 [${chalk.blue('开启')}]`; 
         printMenu()
