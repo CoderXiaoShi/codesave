@@ -34,16 +34,17 @@ const getHistoryGitPath = () => {
     codesaveDataStore = fs.readFileSync(userDataDir, 'utf-8');
     codesaveDataStore = JSON.parse(codesaveDataStore);
   }
-  return codesaveDataStore
+  return codesaveDataStore;
 }
 
 const entry = (curPath = './') => {
   console.log(curPath)
+  process.chdir(curPath)
   saveGitPath(curPath)
   // 配置检查
   initLocalConf();
   // 自动提交
-  const filePath = path.join(curPath, configFileName)
+  const filePath = path.join('./', configFileName)
   const conf = JSON.parse(fs.readFileSync(filePath))
   console.clear()
   if (conf.isAutoPush) {

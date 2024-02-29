@@ -4,6 +4,7 @@ const { execSync } = require('child_process');
 const { configFileName, defaultConfig } = require('./constant');
 const moment = require('moment');
 const chalk = require('chalk');
+const simpleGit = require('simple-git');
 
 /**
  * 提交函数
