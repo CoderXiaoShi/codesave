@@ -47,8 +47,8 @@ const entry = (curPath = './') => {
   const conf = JSON.parse(fs.readFileSync(filePath))
   console.clear()
   if (conf.isAutoPush) {
-    options.get('1').label = `1. 开始自动同步 [${chalk.blue('开启')}]`;
-    options.get('4').label = `4. [${chalk.red('关闭')}] 默认同步`;
+    options.get('1').label = `1. 开始自动同步 [${chalk.blue('已开启')}]`;
+    options.get('4').label = `4. [${chalk.blue('已开启')}] 默认同步`;
     options.get('1').fn();
   } else {
     printMenu()

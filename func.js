@@ -25,7 +25,7 @@ const printMenu = () => {
 */
 
 const autoPush = {
-  label: `1. 开始自动同步 [${chalk.red('关闭')}]`,
+  label: `1. 开始自动同步 [${chalk.red('已关闭')}]`,
   timer: null,
   fn: () => {
     const filePath = path.join('./', configFileName);
