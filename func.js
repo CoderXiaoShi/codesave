@@ -35,11 +35,11 @@ const autoPush = {
       if (autoPush.timer !== null) {
         clearInterval(autoPush.timer);
         autoPush.timer = null
-        autoPush.label = `1. 开始自动同步 [${chalk.red('关闭')}]`;
+        autoPush.label = `1. 开始自动同步 [${chalk.red('已关闭')}]`;
         printMenu()
         console.log(chalk.red('已关闭自动同步'));
       } else {
-        autoPush.label = `1. 开始自动同步 [${chalk.blue('开启')}]`; 
+        autoPush.label = `1. 开始自动同步 [${chalk.blue('已开启')}]`; 
         printMenu()
         conf.isAutoPush = true;
         if (!conf.pushInterval) {
@@ -79,16 +79,16 @@ options.set('3', {
 })
 
 const toggleAutoPush = {
-  label: `4. [${chalk.blue('开启')}] 默认同步`,
+  label: `4. [${chalk.blue('已开启')}] 默认同步`,
   fn: () => {
     const filePath = path.join('./', configFileName);
     const conf = JSON.parse(fs.readFileSync(filePath));
     if (conf.isAutoPush) {
       conf.isAutoPush = false;
-      toggleAutoPush.label = `4. [${chalk.blue('开启')}] 默认同步`;
+      toggleAutoPush.label = `4. [${chalk.red('已关闭')}] 默认同步`;
     } else {
       conf.isAutoPush = true;
-      toggleAutoPush.label = `4. [${chalk.red('关闭')}] 默认同步`;
+      toggleAutoPush.label = `4. [${chalk.blue('已开启')}] 默认同步`;
     }
     fs.writeFileSync(path.join('./', configFileName), JSON.stringify(conf));
     printMenu();
