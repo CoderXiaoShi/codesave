@@ -98,13 +98,18 @@ const entry = (curPath = './') => {
         choices: list,
       },
     ];
+
+    if (list.length === 1) {
+      entry(list[0])
+    } else {
+      // 使用 inquirer 提问
+      inquirer.prompt(questions).then((answers) => {
+        console.log('你选择是：', path.resolve(answers.path));
+        curPath = answers.path
+        entry(curPath)
+      });
+    }
     
-    // 使用 inquirer 提问
-    inquirer.prompt(questions).then((answers) => {
-      console.log('你选择是：', path.resolve(answers.path));
-      curPath = answers.path
-      entry(curPath)
-    });
   } else {
     entry(curPath)
   }
