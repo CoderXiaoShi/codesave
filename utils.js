@@ -20,10 +20,10 @@ const asyncGit = () => {
     execSync('git add .');
     execSync('git commit -m "update"');
     execSync('git push');
-    console.log('同步成功')
   } catch (error) {
-    console.log('同步失败')
+    // console.log('同步失败')
   }
+  console.log('同步成功')
 }
 
 /**

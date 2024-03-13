@@ -1,6 +1,6 @@
 {
   "name": "codesave",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "码记",
   "main": "index.js",
   "bin": "index.js",
