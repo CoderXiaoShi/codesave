@@ -100,6 +100,7 @@ const entry = (curPath = './') => {
     ];
 
     if (list.length === 1) {
+      console.log('正在进入目录：', path.resolve(list[0]));
       entry(list[0])
     } else {
       // 使用 inquirer 提问
