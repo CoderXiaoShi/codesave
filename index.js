@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const { options, printMenu } = require('./func');
-const { initLocalConf } = require('./utils');
+const { initLocalConf, initStatic } = require('./utils');
 const { configFileName } = require('./constant');
 const fs = require('fs');
 const path = require('path');
@@ -42,6 +42,8 @@ const entry = (curPath = './') => {
   saveGitPath(curPath)
   // 配置检查
   initLocalConf();
+  // 初始化空仓库
+  initStatic(curPath);
   // 自动提交
   const filePath = path.join('./', configFileName)
   const conf = JSON.parse(fs.readFileSync(filePath))

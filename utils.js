@@ -47,6 +47,53 @@ const initLocalConf = (configPath = './') => {
   }
 }
 
+// 如果进入了一个空目录, 需要自动创建一些文件
+/*
+  
+  工作日志.md
+  TaskList.md
+  Journal.md
+  ReadingList.md
+  docs
+*/
+const initStatic = (configPath) => {
+  let files = fs.readdirSync(configPath)
+  if (files.length === 1 && files[0] === '.git') {
+    console.log('正在帮助空文件夹创建文件')
+    let fileList = [
+      {
+        fileName: '工作日志.md',
+        type: 'file'
+      },
+      {
+        fileName: 'TaskList.md',
+        type: 'file'
+      },
+      {
+        fileName: 'Journal.md',
+        type: 'file'
+      },
+      {
+        fileName: 'ReadingList.md',
+        type: 'file'
+      },
+      {
+        fileName: 'docs',
+        type: 'directory'
+      },
+    ]
+    for (const item of fileList) {
+      if (item.type === 'file') {
+        fs.writeFileSync(path.join(configPath, item.fileName), '')
+        console.log('已创建: ', item.fileName)
+      } else if (item.type === 'directory') {
+        fs.mkdirSync(path.join(configPath, item.fileName))
+        console.log('已创建: ', item.fileName)
+      }
+    }
+  }
+}
+
 const formatChineseTime = (milliseconds) => {
   const seconds = Math.floor((milliseconds / 1000) % 60);
   const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
@@ -64,5 +111,6 @@ const formatChineseTime = (milliseconds) => {
 module.exports = {
   asyncGit,
   initLocalConf,
+  initStatic,
   formatChineseTime,
 }
