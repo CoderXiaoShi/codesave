@@ -36,6 +36,11 @@ const initLocalConf = (configPath = './') => {
   let filePath = path.join(configPath, configFileName)
   if (!fs.existsSync(filePath)) {
     // 配置不存在, 初始化
+    
+    const directoryPath = path.dirname(filePath);
+    // 确保目录存在，如果不存在则创建
+    fs.mkdirSync(directoryPath, { recursive: true });
+
     fs.writeFileSync(filePath, JSON.stringify(defaultConfig), 'utf8', { flag: 'w+' })
     if (fs.existsSync(path.join(configPath, '.gitignore'))) {
       // 将配置添加到 .gitignore 中
@@ -84,6 +89,11 @@ const initStatic = (configPath) => {
     ]
     for (const item of fileList) {
       if (item.type === 'file') {
+          
+        const directoryPath = path.dirname(configPath);
+        // 确保目录存在，如果不存在则创建
+        fs.mkdirSync(directoryPath, { recursive: true });
+
         fs.writeFileSync(path.join(configPath, item.fileName), '', { flag: 'w+' })
         console.log('已创建: ', item.fileName)
       } else if (item.type === 'directory') {

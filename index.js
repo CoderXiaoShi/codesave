@@ -39,6 +39,11 @@ const getHistoryGitPath = () => {
 
   const userDataDir = path.join(userHomeDir, 'AppData', 'Roaming', '.codesave');
   if (!fs.existsSync(userDataDir)) {
+    
+    const directoryPath = path.dirname(userDataDir);
+    // 确保目录存在，如果不存在则创建
+    fs.mkdirSync(directoryPath, { recursive: true });
+    
     fs.writeFileSync(userDataDir, JSON.stringify(codesaveDataStore), { flag: 'w+' });
   } else {
     codesaveDataStore = fs.readFileSync(userDataDir, 'utf-8');
