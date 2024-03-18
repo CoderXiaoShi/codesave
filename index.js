@@ -18,6 +18,11 @@ const saveGitPath = (curPath) => {
   const userDataDir = path.join(userHomeDir, 'AppData', 'Roaming', '.codesave');
   let codesaveDataStore = getHistoryGitPath();
   codesaveDataStore.history[curPath] = 1;
+
+  const directoryPath = path.dirname(userDataDir);
+  // 确保目录存在，如果不存在则创建
+  fs.mkdirSync(directoryPath, { recursive: true });
+
   fs.writeFileSync(userDataDir, JSON.stringify(codesaveDataStore), 'utf-8', { flag: 'w+' });
 }
 
@@ -27,6 +32,11 @@ const getHistoryGitPath = () => {
   let codesaveDataStore = {
     history: {}
   };
+
+  const directoryPath = path.dirname(userHomeDir);
+  // 确保目录存在，如果不存在则创建
+  fs.mkdirSync(directoryPath, { recursive: true });
+
   const userDataDir = path.join(userHomeDir, 'AppData', 'Roaming', '.codesave');
   if (!fs.existsSync(userDataDir)) {
     fs.writeFileSync(userDataDir, JSON.stringify(codesaveDataStore), { flag: 'w+' });
