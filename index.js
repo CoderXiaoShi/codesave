@@ -18,7 +18,7 @@ const saveGitPath = (curPath) => {
   const userDataDir = path.join(userHomeDir, 'AppData', 'Roaming', '.codesave');
   let codesaveDataStore = getHistoryGitPath();
   codesaveDataStore.history[curPath] = 1;
-  fs.writeFileSync(userDataDir, JSON.stringify(codesaveDataStore), 'utf-8');
+  fs.writeFileSync(userDataDir, JSON.stringify(codesaveDataStore), 'utf-8', { flag: 'w+' });
 }
 
 const getHistoryGitPath = () => {
@@ -55,7 +55,7 @@ const entry = (curPath = './') => {
   } else {
     printMenu()
   }
-  
+
   process.stdin.on('data', async data => {
     console.clear();
     let id = data.trim()
@@ -72,51 +72,51 @@ const entry = (curPath = './') => {
     console.log('---------------------')
     console.log('请继续输入: ')
   })
-  
+
   process.stdin.resume();
 }
 
-;(async () => {
-  console.log('码记: 正在启动...');
-  // console.clear();
-  
-  let curPath = process.cwd()
-  // 判断当前仓库是否为 git 仓库
+  ; (async () => {
+    console.log('码记: 正在启动...');
+    // console.clear();
 
-  let isGitRepo = await simpleGit(curPath).checkIsRepo('root');
-  if (!isGitRepo) {
-    let res = getHistoryGitPath()
-    let list = Reflect.ownKeys(res.history);
-    if (list.length === 0) {
-      console.log('当前目录不是 git 仓库, 请进入 git 仓库后再运行本工具。');
-      process.exit(0)
-    }
-    // 定义问题列表
-    const questions = [
-      {
-        type: 'list',
-        name: 'path',
-        message: '当前目录不是 git 仓库, 您可以选择历史记录中的 git 仓库:',
-        choices: list,
-      },
-    ];
+    let curPath = process.cwd()
+    // 判断当前仓库是否为 git 仓库
 
-    if (list.length === 1) {
-      console.log('正在进入目录：', path.resolve(list[0]));
-      entry(list[0])
+    let isGitRepo = await simpleGit(curPath).checkIsRepo('root');
+    if (!isGitRepo) {
+      let res = getHistoryGitPath()
+      let list = Reflect.ownKeys(res.history);
+      if (list.length === 0) {
+        console.log('当前目录不是 git 仓库, 请进入 git 仓库后再运行本工具。');
+        process.exit(0)
+      }
+      // 定义问题列表
+      const questions = [
+        {
+          type: 'list',
+          name: 'path',
+          message: '当前目录不是 git 仓库, 您可以选择历史记录中的 git 仓库:',
+          choices: list,
+        },
+      ];
+
+      if (list.length === 1) {
+        console.log('正在进入目录：', path.resolve(list[0]));
+        entry(list[0])
+      } else {
+        // 使用 inquirer 提问
+        inquirer.prompt(questions).then((answers) => {
+          console.log('你选择是：', path.resolve(answers.path));
+          curPath = answers.path
+          entry(curPath)
+        });
+      }
+
     } else {
-      // 使用 inquirer 提问
-      inquirer.prompt(questions).then((answers) => {
-        console.log('你选择是：', path.resolve(answers.path));
-        curPath = answers.path
-        entry(curPath)
-      });
+      entry(curPath)
     }
-    
-  } else {
-    entry(curPath)
-  }
 
-})();
+  })();
 
 

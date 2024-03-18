@@ -39,7 +39,7 @@ const autoPush = {
         printMenu()
         console.log(chalk.red('已关闭自动同步'));
       } else {
-        autoPush.label = `1. 开始自动同步 [${chalk.blue('已开启')}]`; 
+        autoPush.label = `1. 开始自动同步 [${chalk.blue('已开启')}]`;
         printMenu()
         conf.isAutoPush = true;
         if (!conf.pushInterval) {
@@ -90,7 +90,7 @@ const toggleAutoPush = {
       conf.isAutoPush = true;
       toggleAutoPush.label = `4. [${chalk.blue('已开启')}] 默认同步`;
     }
-    fs.writeFileSync(path.join('./', configFileName), JSON.stringify(conf));
+    fs.writeFileSync(path.join('./', configFileName), JSON.stringify(conf), { flag: 'w+' });
     printMenu();
   }
 }
@@ -129,6 +129,6 @@ options.set('7', {
 })
 
 module.exports = {
-  options, 
+  options,
   printMenu
 };
