@@ -11,6 +11,8 @@ const options = new Map();
 const printMenu = () => {
   console.log('---------------------')
   console.log('欢迎使用 [码记]')
+  console.log('作者: 程序员小石')
+  console.log('微信: CoderXiaoShi')
   console.log('---------------------\n')
   for (const menuItem of options.values()) {
     console.log(menuItem.label)
