@@ -12,10 +12,25 @@ const os = require('os');
 
 process.stdin.setEncoding('utf-8');
 
-const saveGitPath = (curPath) => {
+function getRootPath() {
   const userHomeDir = os.homedir();
+  const platform = os.platform();
+  if (platform === 'win32') {
+      const rootPath = path.join(userHomeDir, 'AppData', 'Roaming');
+      // return 'Windows';
+      return rootPath;
+  } else if (platform === 'darwin') {
+      // return 'Mac';
+      const rootPath = path.join(userHomeDir,);
+      return rootPath;
+  } else {
+      return 'Other'; // 对于其他系统，比如Linux，返回'Other'
+  }
+}
+
+const saveGitPath = (curPath) => {
   // 拼接 userData 目录的路径
-  const userDataDir = path.join(userHomeDir, 'AppData', 'Roaming', '.codesave');
+  const userDataDir = path.join(getRootPath(), '.codesave');
   let codesaveDataStore = getHistoryGitPath();
   codesaveDataStore.history[curPath] = 1;
 
@@ -37,7 +52,7 @@ const getHistoryGitPath = () => {
   // 确保目录存在，如果不存在则创建
   fs.mkdirSync(directoryPath, { recursive: true });
 
-  const userDataDir = path.join(userHomeDir, 'AppData', 'Roaming', '.codesave');
+  const userDataDir = path.join(getRootPath(), '.codesave');
   if (!fs.existsSync(userDataDir)) {
     
     const directoryPath = path.dirname(userDataDir);
