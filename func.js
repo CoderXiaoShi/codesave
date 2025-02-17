@@ -80,6 +80,15 @@ options.set('3', {
   }
 })
 
+options.set('33', {
+  label: '33. 打开 Trae',
+  fn: () => {
+    printMenu();
+    execSync('trae .')
+    console.log('已执行 ')
+  }
+})
+
 const toggleAutoPush = {
   label: `4. [${chalk.blue('已开启')}] 默认同步`,
   fn: () => {
